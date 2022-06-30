@@ -1,4 +1,3 @@
-# AirBnb
 # `<name of application here>`
 
 ## Database Schema Design
@@ -50,8 +49,8 @@ Returns the information about the current user that is logged in.
 
 * Require Authentication: true
 * Request
-  * Method: GET
-  * URL: /user_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -76,8 +75,8 @@ information.
 
 * Require Authentication: false
 * Request
-  * Method: POST
-  * URL: /session
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -142,8 +141,8 @@ user's information.
 
 * Require Authentication: false
 * Request
-  * Method: POST
-  * URL: /user
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -213,8 +212,8 @@ Returns all the spots.
 
 * Require Authentication: false
 * Request
-  * Method: GET
-  * URL: /Spots
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -252,8 +251,8 @@ Returns all the spots owned (created) by the current user.
 
 * Require Authentication: true
 * Request
-  * Method: GET
-  * URL: /Spots/user_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -291,8 +290,8 @@ Returns the details of a spot specified by its id.
 
 * Require Authentication: false
 * Request
-  * Method: DELETE
-  * URL: /Spot/spot_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -348,8 +347,8 @@ Creates and returns a new spot.
 
 * Require Authentication: true
 * Request
-  * Method: POST
-  * URL: /Spot
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -423,8 +422,8 @@ Updates and returns an existing spot.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: PUT
-  * URL: /spot/spot_id
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -511,8 +510,8 @@ Deletes an existing spot.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: DELETE
-  * URL: /spot
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -547,8 +546,8 @@ Returns all the reviews written by the current user.
 
 * Require Authentication: true
 * Request
-  * Method: GET
-  * URL: /Reviews/user_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -599,8 +598,8 @@ Returns all the reviews that belong to a spot specified by id.
 
 * Require Authentication: false
 * Request
-  * Method: GET
-  * URL: /Reviews/spot_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -652,8 +651,8 @@ Create and return a new review for a spot specified by id.
 
 * Require Authentication: true
 * Request
-  * Method: POST
-  * URL: Reviews/Spot/spot_id
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -733,8 +732,8 @@ Update and return an existing review.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: POST
-  * URL: /Review
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -801,8 +800,8 @@ Delete an existing review.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: DELETE
-  * URL: /Review
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -837,8 +836,8 @@ Return all the bookings that the current user has made.
 
 * Require Authentication: true
 * Request
-  * Method: GET
-  * URL: /Bookings/user_id/
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -882,8 +881,8 @@ Return all the bookings for a spot specified by id.
 
 * Require Authentication: true
 * Request
-  * Method: GET
-  * URL: Bookings/Spot/spot_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response: If you ARE NOT the owner of the spot.
@@ -951,8 +950,8 @@ Create and return a new booking from a spot specified by id.
 * Require Authentication: true
 * Require proper authorization: Spot must NOT belong to the current user
 * Request
-  * Method: POST
-  * URL: Booking/Spot/spot_id
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -1010,8 +1009,8 @@ Update and return an existing booking.
 * Require Authentication: true
 * Require proper authorization: Booking must belong to the current user
 * Request
-  * Method: POST
-  * URL: /Booking
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1092,8 +1091,8 @@ Delete an existing booking.
 * Require proper authorization: Booking must belong to the current user or the
   Spot must belong to the current user
 * Request
-  * Method: DELETE
-  * URL: /Booking
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -1142,8 +1141,8 @@ Create and return a new image for a spot specified by id.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: POST
-  * URL: /
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1189,8 +1188,8 @@ Create and return a new image for a review specified by id.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: POST
-  * URL: / /Review/review_id
+  * Method: ?
+  * URL: ?
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1251,8 +1250,8 @@ Delete an existing image.
 * Require proper authorization: Image must belong to the current user through
   the image's imageableId and imageableType
 * Request
-  * Method: DELETE
-  * URL: /
+  * Method: ?
+  * URL: ?
   * Body: none
 
 * Successful Response
@@ -1287,8 +1286,8 @@ Return spots filtered by query parameters.
 
 * Require Authentication: false
 * Request
-  * Method: POST
-  * URL: /Spots/filters
+  * Method: ?
+  * URL: ?
   * Query Parameters
     * page: integer, minimum: 0, maximum: 10, default: 0
     * size: integer, minimum: 0, maximum: 20, default: 20
