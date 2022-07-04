@@ -1,9 +1,11 @@
 # AirBnb
-# `<name of application here>`
+# `<Find places to stay on Airbnb>`
 
 ## Database Schema Design
 
-`<insert database schema design here>`
+
+<img src="/home/krishan/appacademy-2021-Nov-W/4-Module/5-week/AirBnb/image/Schema 2022-06-30 074728.png">
+
 
 ## API Documentation
 
