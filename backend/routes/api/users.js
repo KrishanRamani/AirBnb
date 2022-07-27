@@ -10,8 +10,8 @@ const router = express.Router();
 const validateSignup = [
   check('email')
     //.exists({ checkFalsy: true })
-    .withMessage('Invalid email')
-    .isEmail(),
+    .isEmail()
+    .withMessage('Invalid email'),
   //.withMessage('Invalid email'),
   check('firstname')
     .exists({ checkFalsy: true })
