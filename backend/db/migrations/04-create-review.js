@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       review: {
-        type: Sequelize.INTEGER(255),
+        type: Sequelize.STRING(255),
         //allowNull: false
       },
       stars: {
