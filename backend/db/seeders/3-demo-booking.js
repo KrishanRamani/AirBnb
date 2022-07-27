@@ -6,7 +6,9 @@ const today = moment.utc().format('YYYY-MM-DD HH:mm:ss');
 const bookings = [
   {
     start_date: today,
-    end_date: today
+    end_date: today,
+    user_id: 2,
+    spot_id: 1
   }
 ];
 
