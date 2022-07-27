@@ -4,23 +4,28 @@ const { Review, User, Spot } = require('../models');
 const reviews = [
   {
     review: "It was awesome!",
-    stars: 4
+    stars: 4,
+    user_id: 1
   },
-  {
-    review: "Review 2",
-    stars: 3
-  },
+  //{
+  //   review: "Review 2",
+  //   stars: 3,
+  //   user_id: 1
+  // },
   {
     review: "Review 3",
-    stars: 2
+    stars: 2,
+    user_id: 2
   },
   {
     review: "Review 4",
-    stars: 1
+    stars: 1,
+    user_id: 3
   },
   {
     review: "Review 5",
-    stars: 5
+    stars: 5,
+    user_id: 4
   }
 ];
 
