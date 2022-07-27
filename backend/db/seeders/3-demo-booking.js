@@ -11,22 +11,24 @@ const bookings = [
 ];
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    for (const booking_info of bookings) {
-      const {
-        start_date,
-        end_date
-      } = booking_info
-      const user = await User.findByPk(1);
-      const spot = await Spot.findByPk(1);
+    up: async (queryInterface, Sequelize) => {
+      await queryInterface.bulkInsert('Bookings', bookings
+        , {});
+    // for (const booking_info of bookings) {
+    //   const {
+    //     start_date,
+    //     end_date
+    //   } = booking_info
+    //   const user = await User.findByPk(1);
+    //   const spot = await Spot.findByPk(1);
 
-      await Booking.create({
-        spot_id: spot.id,
-        user_id: user.id,
-        start_date,
-        end_date
-      });
-    }
+    //   await Booking.create({
+    //     spot_id: spot.id,
+    //     user_id: user.id,
+    //     start_date,
+    //     end_date
+    //   });
+    // }
   },
 
 
