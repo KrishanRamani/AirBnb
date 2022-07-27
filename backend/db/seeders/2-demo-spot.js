@@ -4,7 +4,7 @@ const { Spot } = require('../models');
 const spots = [
   {
     //id: 1,
-    //owner_id: 1,
+    owner_id: 1,
     address: "123 Disney Lane",
     city: "San Francisco",
     state: "California",
@@ -17,7 +17,7 @@ const spots = [
     preview_image: "image url"
   },
   {
-    //id: 2,
+    owner_id: 2,
     address: '1406 Pine St',
     city: 'Chino',
     state: 'New Jersey',
@@ -36,50 +36,50 @@ const spots = [
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // try {
-    //   return queryInterface.bulkInsert('Spots', [
+    await queryInterface.bulkInsert('Spots', spots
 
-    //   ], {});
+      , {});
     // }
     // catch (e) {
     //   console.error(e);
     // }
 
-    for (let spot_info of spots) {
-      const {
-        //id,
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price,
-        preview_image
-      } = spot_info;
+    // for (let spot_info of spots) {
+    //   const {
+    //     //id,
+    //     address,
+    //     city,
+    //     state,
+    //     country,
+    //     lat,
+    //     lng,
+    //     name,
+    //     description,
+    //     price,
+    //     preview_image
+    //   } = spot_info;
 
-      const owner_id = spots.findIndex(spot => spot === spot_info) + 1
+    //   const owner_id = spots.findIndex(spot => spot === spot_info) + 1
 
-      await Spot.create({
-        owner_id,
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price,
-        preview_image
-      });
-    }
+    //   await Spot.create({
+    //     owner_id,
+    //     address,
+    //     city,
+    //     state,
+    //     country,
+    //     lat,
+    //     lng,
+    //     name,
+    //     description,
+    //     price,
+    //     preview_image
+    //   });
+    // }
   },
 
   down: async (queryInterface, Sequelize) => {
     //const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Spots');
+    await queryInterface.bulkDelete('Spots');
     //, {
     //firstname: { [Op.in]: ['Demo', 'Fake1', 'Fake2'] },
     //lastname: { [Op.in]: ['Lition', 'Khalifa', 'Mia'] }

@@ -6,7 +6,7 @@ const reviews = [
     review: "It was awesome!",
     stars: 4,
     user_id: 1,
-    spot_id: 1
+    spot_id: 2
   },
   //{
   //   review: "Review 2",
@@ -25,12 +25,12 @@ const reviews = [
     user_id: 3,
     spot_id: 2
   },
-  {
-    review: "Review 5",
-    stars: 5,
-    user_id: 4,
-    spot_id: 2
-  }
+  // {
+  //   review: "Review 5",
+  //   stars: 5,
+  //   user_id: 4,
+  //   spot_id: 2
+  // }
 ];
 
 module.exports = {
