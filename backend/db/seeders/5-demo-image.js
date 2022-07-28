@@ -42,8 +42,8 @@ module.exports = {
     //const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Images');
     //, {
-      //firstname: { [Op.in]: ['Demo', 'Fake1', 'Fake2'] },
-      //lastname: { [Op.in]: ['Lition', 'Khalifa', 'Mia'] }
+    //firstname: { [Op.in]: ['Demo', 'Fake1', 'Fake2'] },
+    //lastname: { [Op.in]: ['Lition', 'Khalifa', 'Mia'] }
     //}, {});
   }
 };

@@ -1,34 +1,119 @@
 const express = require('express');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
 
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
+//express validator imports
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
+
+
 const router = express.Router();
 
-const validateSignup = [
+
+
+
+// GET /api/set-token-cookie
+// const { setTokenCookie } = require('../../utils/auth.js');
+// const { User } = require('../../db/models');
+
+router.get('/set-token-cookie', async (_req, res) => {
+  const user = await User.findOne({
+    // attributes: { exclude: ['isHost', 'createdAt', 'updatedAt'] },
+    where: {
+      email: 'amytan@gmail.com'
+    },
+
+  });
+  setTokenCookie(res, user);
+  return res.json({ user });
+});
+
+
+// GET /api/restore-user
+const { restoreUser } = require('../../utils/auth.js');
+router.get('/restore-user', restoreUser, (req, res) => {
+  return res.json(req.user);
+}
+);
+
+// GET CURRENT USER
+// GET /api/require-auth
+// const { requireAuth } = require('../../utils/auth.js');
+router.get('/me', requireAuth, (req, res) => {
+
+  const { id, firstname, lastname, email } = req.user;
+
+  res.status(200);
+  return res.json({
+    id,
+    firstname,
+    lastname,
+    email
+  });
+}
+);
+
+// LOGS IN USER
+//checks the body of request's credentials and password
+const validateLogin = [
   check('email')
-    //.exists({ checkFalsy: true })
-    .isEmail()
-    .withMessage('Invalid email'),
-  //.withMessage('Invalid email'),
+    .exists({ checkFalsy: true })
+    // .notEmpty()
+    .withMessage("Email is required"),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage("Password is required"),
+  handleValidationErrors
+];
+
+// LOG IN USER
+router.post('/login', validateLogin,
+  async (req, res, next) => {
+    const { email, password } = req.body;
+    const user = await User.login({ email, password });
+
+    if (!user) {
+      const err = new Error("Invalid credentials");
+      err.message = "Invalid credentials";
+      err.status = 401;
+      err.errors = ['The provided credentials were invalid.'];
+
+      return next(err);
+
+    }
+
+    //setting token cookie with the data you get logging in
+    await setTokenCookie(res, user);
+    // setSessionUser(user);
+
+    res.status(200)
+    return res.json({
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      //req.cookie.token looking for the token, user data,
+      //authorizes user
+      token: req.cookies.token
+    });
+  }
+);
+
+
+//express validator //this only tests the inputs
+const validateSignup = [
   check('firstname')
     .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
-    .withMessage('Please provide a firstname with at least 4 characters.'),
+    .withMessage("First Name is required"),
   check('lastname')
     .exists({ checkFalsy: true })
-    .isLength({ min: 4 })
-    .withMessage('Please provide a lastname with at least 4 characters.'),
-  check('firstname')
-    .not()
+    .withMessage("Last Name is required"),
+  check('email')
+    .exists({ checkFalsy: true })
     .isEmail()
-    .withMessage('firstname cannot be an email.'),
-  check('lastname')
-    .not()
-    .isEmail()
-    .withMessage('lastname cannot be an email.'),
+    .withMessage('Please provide a valid email.'),
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
@@ -36,32 +121,70 @@ const validateSignup = [
   handleValidationErrors
 ];
 
-// Sign up
-router.post(
-  '/',
-  validateSignup,
-  async (req, res, next) => {
-    const { email, password, firstname, lastname } = req.body;
-    const user = await User.signup({ email, firstname, lastname, password });
-    const oldUser = await User.findOne({ where: { email } })
-    if (oldUser) {
-      const error = new Error("User already exists")
-      error.status = 403;
+// SIGN UP
+router.post('/signup', validateSignup, async (req, res, next) => {
+  const { firstname, lastname, email, password } = req.body;
 
-      const errors = {
-        email: "User with that email already exists"
+  const isDuplicateEmail = await User.findOne(
+    {
+      where: {
+        email
       }
-      error.errors = errors;
-      return next(error);
     }
+  );
+
+  if (isDuplicateEmail) {
+    res.status(403)
+    const err = new Error('User already exists');
+    err.message = 'User already exists';
+    err.status = 403;
+    err.errors = ['User with that email already exists'];
+
+    return next(err);
+
+
+  } else {
+
+    const user = await User.signup({ firstname, lastname, email, password });
+
     await setTokenCookie(res, user);
 
+    res.status(200);
     return res.json({
-      user,
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      email: user.email,
+      token: req.cookies.token
     });
   }
+}
 );
+
+router.get('/demoUser', async (req, res) => {
+  const user = await User.login({ email: 'demouser@gmail.com', password: 'password' });
+
+  // console.log(user)
+  setTokenCookie(res, user);
+  res.status(200);
+  return res.json({
+    id: user.id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    email: user.email,
+    token: req.cookies.token
+  });
+})
+
+// // ERROR MIDDLEWARE
+// router.use((err, _req, res, _next) => {
+//     res.json({
+//         message: err.message,
+//         statusCode: err.status,
+//         errors: err.errors,
+//     });
+// });
+
 
 
 module.exports = router;
-

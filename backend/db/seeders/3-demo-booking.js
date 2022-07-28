@@ -13,9 +13,9 @@ const bookings = [
 ];
 
 module.exports = {
-    up: async (queryInterface, Sequelize) => {
-      await queryInterface.bulkInsert('Bookings', bookings
-        , {});
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkInsert('Bookings', bookings
+      , {});
     // for (const booking_info of bookings) {
     //   const {
     //     start_date,
@@ -38,8 +38,8 @@ module.exports = {
     //const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Bookings');
     //, {
-      //firstname: { [Op.in]: ['Demo', 'Fake1', 'Fake2'] },
-      //lastname: { [Op.in]: ['Lition', 'Khalifa', 'Mia'] }
+    //firstname: { [Op.in]: ['Demo', 'Fake1', 'Fake2'] },
+    //lastname: { [Op.in]: ['Lition', 'Khalifa', 'Mia'] }
     //}, {});
   }
 };
