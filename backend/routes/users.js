@@ -6,7 +6,7 @@ const { restoreUser, requireAuth } = require('../utils/auth');
 
 router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
     const bookings = await Booking.findAll({
-        where: { userId: req.user.id },
+        where: { user_id: req.user.id },
         include: { model: Spot.scope('byBookings') },
     });
 
@@ -17,7 +17,7 @@ router.get('/bookings', [restoreUser, requireAuth], async (req, res, next) => {
 
 router.get('/reviews', [restoreUser, requireAuth], async (req, res, next) => {
     const reviews = await Review.findAll({
-        where: { userId: req.user.id },
+        where: { user_id: req.user.id },
         include: [
             {
                 model: User
@@ -29,7 +29,7 @@ router.get('/reviews', [restoreUser, requireAuth], async (req, res, next) => {
     });
 
     for (const review of reviews) {
-        const images = await Image.findAll({ where: { imageableId: review.id } });
+        const images = await Image.findAll({ where: { imagea_id: review.id } });
         const reviewImages = [];
 
         images.map(image => {
@@ -61,7 +61,7 @@ router.get('/spots', [restoreUser, requireAuth], async (req, res, next) => {
     }
 
     const getSpot = await Spot.findAll({
-        where: { ownerId: req.user.id },
+        where: { ownerd_id: req.user.id },
         include: {
             model: Image,
             attributes: []

@@ -15,9 +15,9 @@ const validateReview = [
     handleValidationErrors
 ];
 
-router.post('/:reviewId/images',
+router.post('/:review_id/images',
     requireAuth, async (req, res, next) => {
-        const { reviewId } = req.params;
+        const { review_id } = req.params;
         const { url } = req.body;
         const user = await User.findOne({
             where: { id: req.user.id }
@@ -25,13 +25,13 @@ router.post('/:reviewId/images',
 
         const review = await Review.findOne({
             where: {
-                id: reviewId,
-                userId: user.id
+                id: review_id,
+                user_id: user.id
             }
         });
 
-        const reviewAuthorize = await Review.findByPk(reviewId);
-        if (reviewAuthorize && reviewAuthorize.userId !== req.user.id) {
+        const reviewAuthorize = await Review.findByPk(review_id);
+        if (reviewAuthorize && reviewAuthorize.user_id !== req.user.id) {
             const err = Error("Forbidden");
             err.status = 403;
             return next(err);
@@ -45,7 +45,7 @@ router.post('/:reviewId/images',
 
         const images = await Image.findAll({
             where: {
-                imageableId: reviewId
+                image_id: review_id
             }
         });
 
@@ -62,8 +62,8 @@ router.post('/:reviewId/images',
         res.json(imageCreated);
     });
 
-router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => {
-    const { reviewId } = req.params;
+router.put('/:review_id', validateReview, requireAuth, async (req, res, next) => {
+    const { review_id } = req.params;
 
     const { review, stars } = req.body;
 
@@ -71,7 +71,7 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
         where: { id: req.user.id }
     });
 
-    const reviewExist = await Review.findByPk(reviewId);
+    const reviewExist = await Review.findByPk(review_id);
     if (!reviewExist) {
         const err = Error("Review couldn't be found");
         err.status = 404;
@@ -79,8 +79,8 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
     }
     const getReview = await Review.findOne({
         where: {
-            id: reviewId,
-            userId: currentUser.id
+            id: review_id,
+            user_id: currentUser.id
         }
     });
 
@@ -95,14 +95,14 @@ router.put('/:reviewId', validateReview, requireAuth, async (req, res, next) => 
 });
 
 router.delete('/:reviewId', requireAuth, async (req, res, next) => {
-    const { reviewId } = req.params;
+    const { review_id } = req.params;
 
     const currentUser = await User.findOne({
         where: { id: req.user.id }
     });
-    const reviewAuthorize = await Review.findByPk(reviewId);
+    const reviewAuthorize = await Review.findByPk(review_id);
 
-    if (reviewAuthorize && reviewAuthorize.userId !== req.user.id) {
+    if (reviewAuthorize && reviewAuthorize.user_id !== req.user.id) {
         const err = Error("Forbidden");
         err.status = 403;
         return next(err);
@@ -110,8 +110,8 @@ router.delete('/:reviewId', requireAuth, async (req, res, next) => {
 
     const reviewToDestroy = await Review.findOne({
         where: {
-            id: reviewId,
-            userId: currentUser.id
+            id: review_id,
+            user_id: currentUser.id
         }
     });
 

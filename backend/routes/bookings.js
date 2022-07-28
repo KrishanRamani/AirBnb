@@ -5,12 +5,12 @@ const { Booking, User, Spot } = require('../db/models');
 const { requireAuth } = require('../utils/auth');
 
 
-router.put('/:bookingId', requireAuth, async (req, res, next) => {
-    const { bookingId } = req.params;
+router.put('/:booking_id', requireAuth, async (req, res, next) => {
+    const { booking_id } = req.params;
 
     const {
-        startDate,
-        endDate
+        start_date,
+        end_date
     } = req.body;
 
     const currentUser = await User.findOne({
@@ -20,9 +20,9 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     });
 
 
-    const bookingAuthorize = await Booking.findByPk(bookingId);
+    const bookingAuthorize = await Booking.findByPk(booking_id);
 
-    if (bookingAuthorize && bookingAuthorize.userId !== req.user.id) {
+    if (bookingAuthorize && bookingAuthorize.user_id !== req.user.id) {
         const err = Error("Forbidden");
         err.status = 403;
         return next(err);
@@ -30,8 +30,8 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
     const booking = await Booking.findOne({
         where: {
-            id: bookingId,
-            userId: currentUser.id
+            id: booking_id,
+            user_id: currentUser.id
         }
     });
 
@@ -41,9 +41,9 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    const endDateCompare = booking.endDate.toISOString().split('T')[0];
+    const endDateCompare = booking.end_date.toISOString().split('T')[0];
     const dateNowCompare = new Date().toISOString().split('T')[0];
-    const startDateCompare = booking.startDate.toISOString().split('T')[0];
+    const startDateCompare = booking.start_date.toISOString().split('T')[0];
 
     if (endDateCompare < dateNowCompare) {
         const err = Error("Past bookings can't be modified");
@@ -52,23 +52,23 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
     }
 
     if (booking) {
-    if (startDateCompare === startDate || endDateCompare === endDate) {
+    if (startDateCompare === start_date || endDateCompare === end_date) {
             const err = Error("Sorry this spot is already booked for the specified dates");
             err.status = 403;
             err.errors = {};
-            if (startDateCompare === startDate) {
-                err.errors.startDate = "Start date conflicts with an existing booking";
+            if (startDateCompare === start_date) {
+                err.errors.start_date = "Start date conflicts with an existing booking";
             }
-            if (endDateCompare === endDate) {
-                err.errors.endDate = "End date conflicts with an existing booking";
+            if (endDateCompare === enddate) {
+                err.errors.end_date = "End date conflicts with an existing booking";
             }
             return next(err);
         }
     }
 
     const updateBooking = await booking.update({
-        startDate,
-        endDate
+        start_date,
+        end_date
     });
 
     res.json(updateBooking);
@@ -76,7 +76,7 @@ router.put('/:bookingId', requireAuth, async (req, res, next) => {
 
 
 router.delete('/:bookingId', requireAuth, async (req, res, next) => {
-    const { bookingId } = req.params;
+    const { booking_id } = req.params;
 
     const user = await User.findOne({
         where: {
@@ -84,9 +84,9 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         }
     });
 
-    const bookingAuthorize = await Booking.findByPk(bookingId);
+    const bookingAuthorize = await Booking.findByPk(booking_id);
 
-    if (bookingAuthorize && bookingAuthorize.userId !== req.user.id) {
+    if (bookingAuthorize && bookingAuthorize.user_id !== req.user.id) {
         const err = Error("Forbidden");
         err.status = 403;
         return next(err);
@@ -94,14 +94,14 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
 
     const spot = await Spot.findOne({
         where: {
-            ownerId: user.id
+            owner_id: user.id
         }
     });
 
     const booking = await Booking.findOne({
         where: {
-            id: bookingId,
-            userId: user.id
+            id: booking_id,
+            user_id: user.id
         }
     });
 
@@ -111,7 +111,7 @@ router.delete('/:bookingId', requireAuth, async (req, res, next) => {
         return next(err);
     }
 
-    const startDateCompare = booking.startDate.toISOString().split('T')[0];
+    const startDateCompare = booking.start_date.toISOString().split('T')[0];
     const dateNowCompare = new Date().toISOString().split('T')[0];
 
     if (startDateCompare < dateNowCompare) {
