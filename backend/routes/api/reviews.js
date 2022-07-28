@@ -1,7 +1,4 @@
 const express = require('express');
-//const { singlePublicFileUpload, singleMulterUpload, multiplePublicFileUpload, multipleMulterUpload } = require('../../awsS3.js');
-//const asyncHandler = require('express-async-handler')
-
 //validator
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -22,9 +19,6 @@ const validateReview = [
 
 // ADD IMAGE TO REVIEW BASED ON review_id
 router.post('/:review_id/images', requireAuth, async (req, res, next) => {
-
-    //const multipleUploadedImgUrl = await multiplePublicFileUpload(req.files);
-
 
     const { url } = req.body;
     let { review_id } = req.params;
@@ -101,7 +95,7 @@ router.get('/me', requireAuth, async (req, res) => {
             },
             {
                 model: User,
-                attributes: { exclude: ['isHost', 'email', 'password', 'createdAt', 'updatedAt'] }
+                attributes: { exclude: ['email', 'password', 'createdAt', 'updatedAt'] }
             }]
     });
 

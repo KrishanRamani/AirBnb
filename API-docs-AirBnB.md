@@ -10,12 +10,13 @@
 
 All endpoints that require a current user to be logged in.
 
-* Request: endpoints that require authentication
-* Error Response: Require authentication
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Request: endpoints that require authentication
+- Error Response: Require authentication
+
+  - Status Code: 401
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -29,12 +30,13 @@ All endpoints that require a current user to be logged in.
 All endpoints that require authentication and the current user does not have the
 correct role(s) or permission(s).
 
-* Request: endpoints that require proper authorization
-* Error Response: Require proper authorization
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Request: endpoints that require proper authorization
+- Error Response: Require proper authorization
+
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -47,23 +49,25 @@ correct role(s) or permission(s).
 
 Returns the information about the current user that is logged in.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com"
     }
     ```
@@ -73,13 +77,14 @@ Returns the information about the current user that is logged in.
 Logs in a current user with valid credentials and returns the current user's
 information.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: false
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -88,27 +93,29 @@ information.
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com",
       "token": ""
     }
     ```
 
-* Error Response: Invalid credentials
-  * Status Code: 401
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Invalid credentials
+
+  - Status Code: 401
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -117,11 +124,12 @@ information.
     }
     ```
 
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -139,44 +147,47 @@ information.
 Creates a new user, logs them in as the current user, and returns the current
 user's information.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: false
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com",
       "password": "secret password"
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "firstName": "John",
-      "lastName": "Smith",
+      "firstname": "John",
+      "lastname": "Smith",
       "email": "john.smith@gmail.com",
       "token": ""
     }
     ```
 
-* Error response: User already exists with the specified email
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: User already exists with the specified email
+
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -188,11 +199,12 @@ user's information.
     }
     ```
 
-* Error response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -200,8 +212,8 @@ user's information.
       "statusCode": 400,
       "errors": {
         "email": "Invalid email",
-        "firstName": "First Name is required",
-        "lastName": "Last Name is required"
+        "firstname": "First Name is required",
+        "lastname": "Last Name is required"
       }
     }
     ```
@@ -210,24 +222,26 @@ user's information.
 
 Returns all the spots.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: false
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
-      "Spots":[
+      "Spots": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "address": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
@@ -239,7 +253,7 @@ Returns all the spots.
           "price": 123,
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "preview_image": "image url"
         }
       ]
     }
@@ -249,24 +263,26 @@ Returns all the spots.
 
 Returns all the spots owned (created) by the current user.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "Spots": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "address": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
@@ -278,7 +294,7 @@ Returns all the spots owned (created) by the current user.
           "price": 123,
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "preview_image": "image url"
         }
       ]
     }
@@ -288,22 +304,24 @@ Returns all the spots owned (created) by the current user.
 
 Returns the details of a spot specified by its id.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: false
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "address": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
@@ -314,25 +332,24 @@ Returns the details of a spot specified by its id.
       "description": "Place where web developers are created",
       "price": 123,
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" ,
+      "updatedAt": "2021-11-19 20:39:36",
       "numReviews": 5,
       "avgStarRating": 4.5,
-      "images": [
-        "image url"
-      ],
+      "images": ["image url"],
       "Owner": {
         "id": 1,
-        "firstName": "John",
-        "lastName": "Smith"
+        "firstname": "John",
+        "lastname": "Smith"
       }
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -345,13 +362,14 @@ Returns the details of a spot specified by its id.
 
 Creates and returns a new spot.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -367,16 +385,17 @@ Creates and returns a new spot.
     }
     ```
 
-* Successful Response
-  * Status Code: 201
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 201
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "address": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
@@ -387,15 +406,16 @@ Creates and returns a new spot.
       "description": "Place where web developers are created",
       "price": 123,
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" 
+      "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
-* Error Response: Body validation error
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Body validation error
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -419,14 +439,15 @@ Creates and returns a new spot.
 
 Updates and returns an existing spot.
 
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Require proper authorization: Spot must belong to the current user
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -442,16 +463,17 @@ Updates and returns an existing spot.
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "ownerId": 1,
+      "owner_id": 1,
       "address": "123 Disney Lane",
       "city": "San Francisco",
       "state": "California",
@@ -462,15 +484,16 @@ Updates and returns an existing spot.
       "description": "Place where web developers are created",
       "price": 123,
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-20 10:06:40" 
+      "updatedAt": "2021-11-20 10:06:40"
     }
     ```
 
-* Error Response: Body validation error
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Body validation error
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -490,11 +513,12 @@ Updates and returns an existing spot.
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -507,31 +531,34 @@ Updates and returns an existing spot.
 
 Deletes an existing spot.
 
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Require proper authorization: Spot must belong to the current user
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "message": "Successfully deleted",
-      "statusCode": 200 
+      "statusCode": 200
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -544,37 +571,39 @@ Deletes an existing spot.
 
 Returns all the reviews written by the current user.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "Reviews": [
         {
           "id": 1,
-          "userId": 1,
-          "spotId": 1,
+          "user_id": 1,
+          "spot_id": 1,
           "review": "This was an awesome spot!",
           "stars": 5,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
+          "updatedAt": "2021-11-19 20:39:36",
           "User": {
             "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
+            "firstname": "John",
+            "lastname": "Smith"
           },
           "Spot": {
             "id": 1,
-            "ownerId": 1,
+            "owner_id": 1,
             "address": "123 Disney Lane",
             "city": "San Francisco",
             "state": "California",
@@ -584,9 +613,7 @@ Returns all the reviews written by the current user.
             "name": "App Academy",
             "price": 123
           },
-          "images": [
-            "image url"
-          ]
+          "images": ["image url"]
         }
       ]
     }
@@ -596,47 +623,48 @@ Returns all the reviews written by the current user.
 
 Returns all the reviews that belong to a spot specified by id.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: false
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "Reviews": [
         {
           "id": 1,
-          "userId": 1,
-          "spotId": 1,
+          "user_id": 1,
+          "spot_id": 1,
           "review": "This was an awesome spot!",
           "stars": 5,
           "createdAt": "2021-11-19 20:39:36",
-          "updatedAt": "2021-11-19 20:39:36" ,
+          "updatedAt": "2021-11-19 20:39:36",
           "User": {
             "id": 1,
-            "firstName": "John",
-            "lastName": "Smith"
+            "firstname": "John",
+            "lastname": "Smith"
           },
-          "images": [
-            "image url"
-          ]
+          "images": ["image url"]
         }
       ]
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -649,44 +677,47 @@ Returns all the reviews that belong to a spot specified by id.
 
 Create and return a new review for a spot specified by id.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "review": "This was an awesome spot!",
-      "stars": 5,
+      "stars": 5
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "userId": 1,
-      "spotId": 1,
+      "user_id": 1,
+      "spot_id": 1,
       "review": "This was an awesome spot!",
       "stars": 5,
       "createdAt": "2021-11-19 20:39:36",
-      "updatedAt": "2021-11-19 20:39:36" 
+      "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -694,16 +725,17 @@ Create and return a new review for a spot specified by id.
       "statusCode": 400,
       "errors": {
         "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
+        "stars": "Stars must be an integer from 1 to 5"
       }
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -712,11 +744,12 @@ Create and return a new review for a spot specified by id.
     }
     ```
 
-* Error response: Review from the current user already exists for the Spot
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Review from the current user already exists for the Spot
+
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -729,33 +762,35 @@ Create and return a new review for a spot specified by id.
 
 Update and return an existing review.
 
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Require proper authorization: Review must belong to the current user
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "review": "This was an awesome spot!",
-      "stars": 5,
+      "stars": 5
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "userId": 1,
-      "spotId": 1,
+      "user_id": 1,
+      "spot_id": 1,
       "review": "This was an awesome spot!",
       "stars": 5,
       "createdAt": "2021-11-19 20:39:36",
@@ -763,11 +798,12 @@ Update and return an existing review.
     }
     ```
 
-* Error Response: Body validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Body validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -775,16 +811,17 @@ Update and return an existing review.
       "statusCode": 400,
       "errors": {
         "review": "Review text is required",
-        "stars": "Stars must be an integer from 1 to 5",
+        "stars": "Stars must be an integer from 1 to 5"
       }
     }
     ```
 
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Review with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -797,31 +834,34 @@ Update and return an existing review.
 
 Delete an existing review.
 
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Require proper authorization: Review must belong to the current user
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "message": "Successfully deleted",
-      "statusCode": 200 
+      "statusCode": 200
     }
     ```
 
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Review with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -834,27 +874,29 @@ Delete an existing review.
 
 Return all the bookings that the current user has made.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "Bookings": [
         {
           "id": 1,
-          "spotId": 1,
+          "spot_id": 1,
           "Spot": {
             "id": 1,
-            "ownerId": 1,
+            "owner_id": 1,
             "address": "123 Disney Lane",
             "city": "San Francisco",
             "state": "California",
@@ -863,11 +905,11 @@ Return all the bookings that the current user has made.
             "lng": -122.4730327,
             "name": "App Academy",
             "price": 123,
-            "previewImage": "image url"
+            "preview_image": "image url"
           },
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-19",
+          "user_id": 2,
+          "start_date": "2021-11-19",
+          "end_date": "2021-11-19",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -879,35 +921,38 @@ Return all the bookings that the current user has made.
 
 Return all the bookings for a spot specified by id.
 
-* Require Authentication: true
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Request
 
-* Successful Response: If you ARE NOT the owner of the spot.
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response: If you ARE NOT the owner of the spot.
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "Bookings": [
         {
-          "spotId": 1,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-19"
+          "spot_id": 1,
+          "start_date": "2021-11-19",
+          "end_date": "2021-11-19"
         }
       ]
     }
     ```
 
-* Successful Response: If you ARE the owner of the spot.
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response: If you ARE the owner of the spot.
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -915,14 +960,14 @@ Return all the bookings for a spot specified by id.
         {
           "User": {
             "id": 2,
-            "firstName": "John",
-            "lastName": "Smith"
+            "firstname": "John",
+            "lastname": "Smith"
           },
           "id": 1,
-          "spotId": 1,
-          "userId": 2,
-          "startDate": "2021-11-19",
-          "endDate": "2021-11-19",
+          "spot_id": 1,
+          "user_id": 2,
+          "start_date": "2021-11-19",
+          "end_date": "2021-11-19",
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36"
         }
@@ -930,11 +975,12 @@ Return all the bookings for a spot specified by id.
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -947,36 +993,39 @@ Return all the bookings for a spot specified by id.
 
 Create and return a new booking from a spot specified by id.
 
-* Require Authentication: true
-* Require proper authorization: Spot must NOT belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Require proper authorization: Spot must NOT belong to the current user
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "spotId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-19",
+      "spot_id": 1,
+      "user_id": 2,
+      "start_date": "2021-11-19",
+      "end_date": "2021-11-19",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-19 20:39:36"
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -985,19 +1034,20 @@ Create and return a new booking from a spot specified by id.
     }
     ```
 
-* Error response: Booking conflict
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Booking conflict
+
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "message": "Sorry, this spot is already booked for the specified dates",
       "statusCode": 403,
       "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
+        "start_date": "Start date conflicts with an existing booking",
+        "end_date": "End date conflicts with an existing booking"
       }
     }
     ```
@@ -1006,45 +1056,48 @@ Create and return a new booking from a spot specified by id.
 
 Update and return an existing booking.
 
-* Require Authentication: true
-* Require proper authorization: Booking must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Require proper authorization: Booking must belong to the current user
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-19"
+      "start_date": "2021-11-19",
+      "end_date": "2021-11-19"
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
-      "spotId": 1,
-      "userId": 2,
-      "startDate": "2021-11-19",
-      "endDate": "2021-11-19",
+      "spot_id": 1,
+      "user_id": 2,
+      "start_date": "2021-11-19",
+      "end_date": "2021-11-19",
       "createdAt": "2021-11-19 20:39:36",
       "updatedAt": "2021-11-20 10:06:40"
     }
     ```
 
-* Error response: Couldn't find a Booking with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Booking with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1053,11 +1106,12 @@ Update and return an existing booking.
     }
     ```
 
-* Error response: Can't edit a booking that's past the end date
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Can't edit a booking that's past the end date
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1066,19 +1120,20 @@ Update and return an existing booking.
     }
     ```
 
-* Error response: Booking conflict
-  * Status Code: 403
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Booking conflict
+
+  - Status Code: 403
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "message": "Sorry, this spot is already booked for the specified dates",
       "statusCode": 403,
       "errors": {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
+        "start_date": "Start date conflicts with an existing booking",
+        "end_date": "End date conflicts with an existing booking"
       }
     }
     ```
@@ -1087,19 +1142,21 @@ Update and return an existing booking.
 
 Delete an existing booking.
 
-* Require Authentication: true
-* Require proper authorization: Booking must belong to the current user or the
+- Require Authentication: true
+- Require proper authorization: Booking must belong to the current user or the
   Spot must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1108,11 +1165,12 @@ Delete an existing booking.
     }
     ```
 
-* Error response: Couldn't find a Booking with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Booking with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1121,11 +1179,12 @@ Delete an existing booking.
     }
     ```
 
-* Error response: Can't delete a booking that's past the start date
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Can't delete a booking that's past the start date
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1138,14 +1197,15 @@ Delete an existing booking.
 
 Create and return a new image for a spot specified by id.
 
-* Require Authentication: true
-* Require proper authorization: Spot must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Require proper authorization: Spot must belong to the current user
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1153,26 +1213,28 @@ Create and return a new image for a spot specified by id.
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
       "imageableId": 1,
-      "imageableType": "Spot",
-      "url": "image url",
+      "image_type": "Spot",
+      "url": "image url"
     }
     ```
 
-* Error response: Couldn't find a Spot with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Spot with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1185,14 +1247,15 @@ Create and return a new image for a spot specified by id.
 
 Create and return a new image for a review specified by id.
 
-* Require Authentication: true
-* Require proper authorization: Review must belong to the current user
-* Request
-  * Method: ?
-  * URL: ?
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Require Authentication: true
+- Require proper authorization: Review must belong to the current user
+- Request
+
+  - Method: ?
+  - URL: ?
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1200,26 +1263,28 @@ Create and return a new image for a review specified by id.
     }
     ```
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
       "id": 1,
       "imageableId": 1,
-      "imageableType": "Review",
-      "url": "image url",
+      "image_type": "Review",
+      "url": "image url"
     }
     ```
 
-* Error response: Couldn't find a Review with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find a Review with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1228,12 +1293,13 @@ Create and return a new image for a review specified by id.
     }
     ```
 
-* Error response: Cannot add any more images because there is a maximum of 10
+- Error response: Cannot add any more images because there is a maximum of 10
   images per resource
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1246,19 +1312,21 @@ Create and return a new image for a review specified by id.
 
 Delete an existing image.
 
-* Require Authentication: true
-* Require proper authorization: Image must belong to the current user through
-  the image's imageableId and imageableType
-* Request
-  * Method: ?
-  * URL: ?
-  * Body: none
+- Require Authentication: true
+- Require proper authorization: Image must belong to the current user through
+  the image's imageableId and image_type
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1267,11 +1335,12 @@ Delete an existing image.
     }
     ```
 
-* Error response: Couldn't find an Image with the specified id
-  * Status Code: 404
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error response: Couldn't find an Image with the specified id
+
+  - Status Code: 404
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
@@ -1284,33 +1353,35 @@ Delete an existing image.
 
 Return spots filtered by query parameters.
 
-* Require Authentication: false
-* Request
-  * Method: ?
-  * URL: ?
-  * Query Parameters
-    * page: integer, minimum: 0, maximum: 10, default: 0
-    * size: integer, minimum: 0, maximum: 20, default: 20
-    * minLat: decimal, optional
-    * maxLat: decimal, optional
-    * minLng: decimal, optional
-    * maxLng: decimal, optional
-    * minPrice: decimal, optional, minimum: 0
-    * maxPrice: decimal, optional, minimum: 0
-  * Body: none
+- Require Authentication: false
+- Request
 
-* Successful Response
-  * Status Code: 200
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+  - Method: ?
+  - URL: ?
+  - Query Parameters
+    - page: integer, minimum: 0, maximum: 10, default: 0
+    - size: integer, minimum: 0, maximum: 20, default: 20
+    - minLat: decimal, optional
+    - maxLat: decimal, optional
+    - minLng: decimal, optional
+    - maxLng: decimal, optional
+    - minPrice: decimal, optional, minimum: 0
+    - maxPrice: decimal, optional, minimum: 0
+  - Body: none
+
+- Successful Response
+
+  - Status Code: 200
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {
-      "Spots":[
+      "Spots": [
         {
           "id": 1,
-          "ownerId": 1,
+          "owner_id": 1,
           "address": "123 Disney Lane",
           "city": "San Francisco",
           "state": "California",
@@ -1322,7 +1393,7 @@ Return spots filtered by query parameters.
           "price": 123,
           "createdAt": "2021-11-19 20:39:36",
           "updatedAt": "2021-11-19 20:39:36",
-          "previewImage": "image url"
+          "preview_image": "image url"
         }
       ],
       "page": 2,
@@ -1330,11 +1401,12 @@ Return spots filtered by query parameters.
     }
     ```
 
-* Error Response: Query parameter validation errors
-  * Status Code: 400
-  * Headers:
-    * Content-Type: application/json
-  * Body:
+- Error Response: Query parameter validation errors
+
+  - Status Code: 400
+  - Headers:
+    - Content-Type: application/json
+  - Body:
 
     ```json
     {

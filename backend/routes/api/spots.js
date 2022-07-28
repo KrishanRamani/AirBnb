@@ -15,8 +15,6 @@ const { Op } = require("sequelize");
 
 
 
-
-
 // SPOT VALIDATION ERROR
 //checks the body of new spot post request
 const validateSpot = [
@@ -103,7 +101,7 @@ router.get('/:spot_id/reviews', async (req, res) => {
         },
         {
             model: User,
-            attributes: { exclude: ['isHost', 'email', 'password', 'createdAt', 'updatedAt'] }
+            attributes: { exclude: [ 'email', 'password', 'createdAt', 'updatedAt'] }
         }]
     });
 
@@ -285,10 +283,7 @@ router.post('/:spot_id/bookings', requireAuth, async (req, res, next) => {
 // })
 
 // ADD AN IMAGE TO SPOT BASED ON spot_id
-router.post('/:spot_id/images', requireAuth , (async (req, res, next) => {
-
-    //const multipleUploadedImgUrl = await multiplePublicFileUpload(req.files);
-
+router.post('/:spot_id/images', requireAuth, (async (req, res, next) => {
 
     const { spot_id } = req.params;
     const spot = await Spot.findByPk(spot_id);
@@ -349,9 +344,8 @@ router.get('/me', requireAuth, async (req, res) => {
             owner_id: req.user.id
         }
     });
-    // Spots.dataValues.preview_image =
-    const newSpots = preview_image(Spots)
 
+    const newSpots = preview_image(Spots)
 
     res.status(200);
     return res.json({ Spots: newSpots });
@@ -389,7 +383,6 @@ router.get('/:spot_id', async (req, res) => {
             where: {
                 id: spots.owner_id
             },
-            attributes: { exclude: ['isHost'] }
         })
 
         let starSum = 0;

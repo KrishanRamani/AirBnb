@@ -25,7 +25,6 @@ router.delete('/:image_id', requireAuth, async (req, res, next) => {
     })
 
     if (image) {
-        // if (req.user.id === spot.owner_id) {
         if ((spot.id === image.spot_id) && (image.image_type === 'Spot')) {
             image.destroy();
             res.status(200);
@@ -33,16 +32,7 @@ router.delete('/:image_id', requireAuth, async (req, res, next) => {
                 "message": "Successfully deleted",
                 "statusCode": 200
             })
-
-
         }
-        // else {
-        //     const err = new Error('Forbidden');
-        //     err.message = 'Forbidden';
-        //     err.status = 403;
-        //     return next(err);
-        // }
-        // console.log(review.id, image.review_id, image.image_type)
         else if ((review.id === image.review_id) && (image.image_type === 'Review')) {
             image.destroy();
             res.status(200);
@@ -50,8 +40,6 @@ router.delete('/:image_id', requireAuth, async (req, res, next) => {
                 "message": "Successfully deleted",
                 "statusCode": 200
             })
-
-
         } else {
             res.status(403)
             const err = new Error('Forbidden');
@@ -68,7 +56,6 @@ router.delete('/:image_id', requireAuth, async (req, res, next) => {
         return next(err);
     }
 })
-
 
 
 module.exports = router;

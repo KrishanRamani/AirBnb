@@ -7,11 +7,7 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-
-
 const router = express.Router();
-
-
 
 
 // GET /api/set-token-cookie
@@ -56,11 +52,9 @@ router.get('/me', requireAuth, (req, res) => {
 );
 
 // LOGS IN USER
-//checks the body of request's credentials and password
 const validateLogin = [
   check('email')
     .exists({ checkFalsy: true })
-    // .notEmpty()
     .withMessage("Email is required"),
   check('password')
     .exists({ checkFalsy: true })
@@ -84,9 +78,7 @@ router.post('/login', validateLogin,
 
     }
 
-    //setting token cookie with the data you get logging in
     await setTokenCookie(res, user);
-    // setSessionUser(user);
 
     res.status(200)
     return res.json({
@@ -94,8 +86,6 @@ router.post('/login', validateLogin,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      //req.cookie.token looking for the token, user data,
-      //authorizes user
       token: req.cookies.token
     });
   }
@@ -175,16 +165,6 @@ router.get('/demoUser', async (req, res) => {
     token: req.cookies.token
   });
 })
-
-// // ERROR MIDDLEWARE
-// router.use((err, _req, res, _next) => {
-//     res.json({
-//         message: err.message,
-//         statusCode: err.status,
-//         errors: err.errors,
-//     });
-// });
-
 
 
 module.exports = router;
