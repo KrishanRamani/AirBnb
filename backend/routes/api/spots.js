@@ -285,7 +285,7 @@ router.post('/:spot_id/bookings', requireAuth, async (req, res, next) => {
 // })
 
 // ADD AN IMAGE TO SPOT BASED ON spot_id
-router.post('/:spot_id/images', requireAuth(async (req, res, next) => {
+router.post('/:spot_id/images', requireAuth , (async (req, res, next) => {
 
     //const multipleUploadedImgUrl = await multiplePublicFileUpload(req.files);
 
