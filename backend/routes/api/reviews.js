@@ -21,9 +21,9 @@ const validateReview = [
 ];
 
 // ADD IMAGE TO REVIEW BASED ON review_id
-router.post('/:review_id/images', multipleMulterUpload("images"), requireAuth, async (req, res, next) => {
+router.post('/:review_id/images', requireAuth, async (req, res, next) => {
 
-    const multipleUploadedImgUrl = await multiplePublicFileUpload(req.files);
+    //const multipleUploadedImgUrl = await multiplePublicFileUpload(req.files);
 
 
     const { url } = req.body;
