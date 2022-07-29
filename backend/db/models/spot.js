@@ -111,7 +111,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       preview_image: {
         type: DataTypes.STRING,
-        allowNull: true
+        //allowNull: true
       },
     }, {
     scopes: {

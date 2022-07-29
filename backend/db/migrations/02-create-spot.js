@@ -69,7 +69,7 @@ module.exports = {
       },
       preview_image: {
         type: Sequelize.STRING(255),
-        allowNull: false,
+        //allowNull: false,
         // references: {
         //   model : "Users",
         // } 

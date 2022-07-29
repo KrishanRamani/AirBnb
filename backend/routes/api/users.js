@@ -78,7 +78,7 @@ router.post('/login', validateLogin,
 
     }
 
-    await setTokenCookie(res, user);
+   const cookies = await setTokenCookie(res, user);
 
     res.status(200)
     return res.json({
@@ -86,7 +86,7 @@ router.post('/login', validateLogin,
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
-      token: req.cookies.token
+      token: cookies
     });
   }
 );
@@ -141,10 +141,11 @@ router.post('/signup', validateSignup, async (req, res, next) => {
 
     res.status(200);
     return res.json({
-      id: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
+      user,
+      // id: user.id,
+      // firstname: user.firstname,
+      // lastname: user.lastname,
+      // email: user.email,
       token: req.cookies.token
     });
   }

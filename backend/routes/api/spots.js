@@ -118,7 +118,7 @@ router.get('/:spot_id/reviews', async (req, res) => {
 });
 
 // CREATE A REVIEW FOR A SPOT BASED ON THE SPOTS ID
-router.post('/:spot_id/reviews', requireAuth, validateReview, async (req, res, next) => {
+router.post('/:spot_id/reviews', restoreUser, requireAuth, validateReview, async (req, res, next) => {
     let { spot_id } = req.params;
     spot_id = parseInt(spot_id);
     const { review, stars } = req.body;
@@ -161,7 +161,7 @@ router.post('/:spot_id/reviews', requireAuth, validateReview, async (req, res, n
 });
 
 // GET ALL BOOKINGS FROM SPOT BASED ON SPOT ID
-router.get('/:spot_id/bookings', requireAuth, async (req, res, next) => {
+router.get('/:spot_id/bookings', restoreUser, requireAuth, async (req, res, next) => {
     const { spot_id } = req.params;
     const spot = await Spot.findByPk(spot_id);
 
@@ -199,7 +199,7 @@ router.get('/:spot_id/bookings', requireAuth, async (req, res, next) => {
 })
 
 // CREATE A BOOKING FROM A SPOT BASED ON THE SPOT'S ID
-router.post('/:spot_id/bookings', requireAuth, async (req, res, next) => {
+router.post('/:spot_id/bookings', restoreUser, requireAuth, async (req, res, next) => {
     const { spot_id } = req.params;
     const spot = await Spot.findByPk(spot_id);
     let { start_date, end_date } = req.body;
@@ -283,7 +283,7 @@ router.post('/:spot_id/bookings', requireAuth, async (req, res, next) => {
 // })
 
 // ADD AN IMAGE TO SPOT BASED ON spot_id
-router.post('/:spot_id/images', requireAuth, (async (req, res, next) => {
+router.post('/:spot_id/images', restoreUser, requireAuth, (async (req, res, next) => {
 
     const { spot_id } = req.params;
     const spot = await Spot.findByPk(spot_id);
@@ -334,8 +334,9 @@ router.post('/:spot_id/images', requireAuth, (async (req, res, next) => {
 
 
 // GET ALL SPOTS OF CURRENT USER
-router.get('/me', requireAuth, async (req, res) => {
+router.get('/me', restoreUser, requireAuth, async (req, res) => {
     const Spots = await Spot.findAll({
+
         include: [{
             model: Image,
             attributes: ['url']
@@ -344,6 +345,7 @@ router.get('/me', requireAuth, async (req, res) => {
             owner_id: req.user.id
         }
     });
+    console.log("");
 
     const newSpots = preview_image(Spots)
 
@@ -410,7 +412,7 @@ router.get('/:spot_id', async (req, res) => {
 });
 
 // EDIT A SPOT
-router.put('/:spot_id', requireAuth, validateSpot, async (req, res, next) => {
+router.put('/:spot_id', restoreUser, requireAuth, validateSpot, async (req, res, next) => {
     const { spot_id } = req.params;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
@@ -447,7 +449,7 @@ router.put('/:spot_id', requireAuth, validateSpot, async (req, res, next) => {
 });
 
 // DELETE SPOT BY ID
-router.delete('/:spot_id', requireAuth, async (req, res) => {
+router.delete('/:spot_id', restoreUser, requireAuth, async (req, res) => {
     const { spot_id } = req.params;
     const spot = await Spot.findByPk(spot_id);
 
@@ -609,7 +611,7 @@ router.get('/', validatePagination, validateLat, validateLng, async (req, res) =
 
 
 // CREATE A SPOT
-router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', restoreUser, requireAuth, validateSpot, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
 
