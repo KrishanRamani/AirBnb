@@ -1,5 +1,5 @@
 const express = require('express');
-//const { multiplePublicFileUpload, multipleMulterUpload } = require('../../awsS3.js');
+//const { multiplePublicFileUpload, multipleMulterUpload } = require('../../app.js');
 //const asyncHandler = require('express-async-handler')
 
 //validator
@@ -96,12 +96,12 @@ router.get('/:spot_id/reviews', async (req, res) => {
             spot_id
         },
         include: [{
-            model: Image, as: 'images',
+            model: Image,
             attributes: ['url']
         },
         {
             model: User,
-            attributes: { exclude: [ 'email', 'password', 'createdAt', 'updatedAt'] }
+            attributes: { exclude: ['email', 'password', 'createdAt', 'updatedAt'] }
         }]
     });
 
@@ -263,74 +263,113 @@ router.post('/:spot_id/bookings', restoreUser, requireAuth, async (req, res, nex
 });
 
 // // GET IMAGES OF SPOT BY spot_id
-// router.get('/:spot_id/images', requireAuth, async (req, res) => {
-//     const { url } = req.body;
-//     const { spot_id } = req.params;
-//     const spot = await Spot.findOne({
-//         where: { id: spot_id }
-//         ,
-//         include: [{
-//             model: Image, as: 'Images',
-//             attributes: ['url']
-//         }]
-//     }
-//     );
+router.get('/:spot_id/images', restoreUser, requireAuth, async (req, res) => {
+    const { url } = req.body;
+    const { spot_id } = req.params;
+    const spot = await Spot.findOne({
+        where: { id: spot_id }
+        ,
+        include: [{
+            model: Image,
+            attributes: ['url']
+        }]
+    }
+    );
 
 
-//     res.status(200);
-//     res.json(spot);
+    res.status(200);
+    res.json(spot);
 
-// })
+})
 
 // ADD AN IMAGE TO SPOT BASED ON spot_id
-router.post('/:spot_id/images', restoreUser, requireAuth, (async (req, res, next) => {
+router.post('/:spot_id/images', restoreUser, requireAuth, async (req, res, next) => {
 
-    const { spot_id } = req.params;
-    const spot = await Spot.findByPk(spot_id);
+        const { spot_id } = req.params;
+        const { url } = req.body;
 
+        const user = await User.findOne({
+            where: {
+                id: req.user.id
+            }
+        });
 
-    if (spot) {
-        if (req.user.id === spot.owner_id) {
+        const spotAuthorize = await Spot.findByPk(spot_id);
 
-            const responseArr = [];
-            multipleUploadedImgUrl.forEach((img, index) => {
-
-
-                const image = Image.create({
-                    image_type: 'Spot',
-                    url: img,
-                    spot_id,
-                    review_id: null
-                });
-
-
-                if (image.spot_id) {
-                    image.dataValues.imageableId = parseInt(spot_id);
-                    delete image.dataValues.spot_id;
-                    delete image.dataValues.review_id;
-                    delete image.dataValues.createdAt;
-                    delete image.dataValues.updatedAt;
-                }
-                responseArr.push(image);
-            })
-            res.status(200);
-            res.json(responseArr);
-
-
-        } else {
-            const err = new Error('Forbidden');
-            err.message = 'Forbidden';
+        if (spotAuthorize && spotAuthorize.owner_id !== req.user.id) {
+            const err = Error("Forbidden");
             err.status = 403;
             return next(err);
         }
-    } else {
-        res.status(404)
-        const err = new Error("Spot couldn't be found");
-        err.message = "Spot couldn't be found";
-        err.status = 404;
-        next(err);
-    }
-}));
+
+        const spot = await Spot.findOne({
+            where: {
+                id: spot_id,
+                owner_id: user.id
+            }
+        });
+
+        if (!spot) {
+            const err = Error("Spot couldn't be found");
+            err.status = 404;
+            return next(err);
+        }
+
+        const image = await spot.createImage({
+            url
+        });
+
+        const imageCreated = await Image.findByPk(image.id);
+
+        res.json(imageCreated);
+    });
+    
+//     let multipleUploadedImgUrl;
+//     const { spot_id } = req.params;
+//     const spot = await Spot.findByPk(spot_id);
+
+
+//     if (spot) {
+//         if (req.user.id === spot.owner_id) {
+//             //= await multiplePublicFileUpload(req.files);
+//             const responseArr = [];
+//             multipleUploadedImgUrl.forEach((img, index) => {
+
+//                 const image = Image.create({
+//                     image_type: 'Spot',
+//                     url: img,
+//                     spot_id,
+//                     review_id: null
+//                 });
+
+
+//                 if (image.spot_id) {
+//                     image.dataValues.image_id = parseInt(spot_id);
+//                     delete image.dataValues.spot_id;
+//                     delete image.dataValues.review_id;
+//                     delete image.dataValues.createdAt;
+//                     delete image.dataValues.updatedAt;
+//                 }
+//                 responseArr.push(image);
+//             })
+//             res.status(200);
+//             res.json(responseArr);
+
+
+//         } else {
+//             const err = new Error('Forbidden');
+//             err.message = 'Forbidden';
+//             err.status = 403;
+//             return next(err);
+//         }
+//     } else {
+//         res.status(404)
+//         const err = new Error("Spot couldn't be found");
+//         err.message = "Spot couldn't be found";
+//         err.status = 404;
+//         next(err);
+//     }
+// }));
 
 
 // GET ALL SPOTS OF CURRENT USER

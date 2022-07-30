@@ -10,11 +10,11 @@ module.exports = {
       },
       image_id: {
         type: Sequelize.INTEGER(30),
-        allowNull: false
+        //allowNull: false
       },
       image_type: {
         type: Sequelize.STRING(30),
-        allowNull: false
+        //allowNull: false
       },
       url: {
         type: Sequelize.STRING(255),

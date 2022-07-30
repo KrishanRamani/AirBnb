@@ -83,15 +83,15 @@ information.
 - Request
 
   - Method: POST
-  - URL: /login
+  - URL: /users/login
   - Headers:
     - Content-Type: application/json
   - Body:
 
     ```json
     {
-      "email": "john.smith@gmail.com",
-      "password": "secret password"
+      "email": "demo@user.io",
+      "password": "password"
     }
     ```
 
@@ -228,7 +228,7 @@ Returns all the spots.
 - Request
 
   - Method: GET
-  - URL: /Spots
+  - URL: /api/spots
   - Body: none
 
 - Successful Response
@@ -368,7 +368,7 @@ Creates and returns a new spot.
 - Request
 
   - Method: POST
-  - URL: /Spot
+  - URL: /api/spots
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -446,7 +446,7 @@ Updates and returns an existing spot.
 - Request
 
   - Method: PUT
-  - URL: /spots/spot_id
+  - URL: /api/spots/spot_id
   - Headers:
     - Content-Type: application/json
   - Body:
@@ -538,7 +538,7 @@ Deletes an existing spot.
 - Request
 
   - Method: DELETE
-  - URL: /spots/spot_id
+  - URL: /api/spots/spot_id
   - Body: none
 
 - Successful Response
@@ -577,7 +577,7 @@ Returns all the reviews written by the current user.
 - Request
 
   - Method: GET
-  - URL: /me/reviews
+  - URL: /api/me/reviews
   - Body: none
 
 - Successful Response
@@ -629,7 +629,7 @@ Returns all the reviews that belong to a spot specified by id.
 - Request
 
   - Method: GET
-  - URL: /spots/spot_id/reviews
+  - URL: /api/spots/spot_id/reviews
   - Body: none
 
 - Successful Response

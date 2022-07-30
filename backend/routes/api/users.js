@@ -37,7 +37,7 @@ router.get('/restore-user', restoreUser, (req, res) => {
 // GET CURRENT USER
 // GET /api/require-auth
 // const { requireAuth } = require('../../utils/auth.js');
-router.get('/me', requireAuth, (req, res) => {
+router.get('/me',restoreUser, requireAuth, (req, res) => {
 
   const { id, firstname, lastname, email } = req.user;
 
@@ -61,6 +61,7 @@ const validateLogin = [
     .withMessage("Password is required"),
   handleValidationErrors
 ];
+
 
 // LOG IN USER
 router.post('/login', validateLogin,

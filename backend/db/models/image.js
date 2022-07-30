@@ -34,12 +34,12 @@ module.exports = (sequelize, DataTypes) => {
     //},
     image_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      //allowNull: false,
       //onDelete: 'CASCADE'
     },
     image_type: {
       type: DataTypes.STRING(50),
-      allowNull: false
+      //allowNull: false
     },
     url: {
       type: DataTypes.STRING(255),

@@ -13,7 +13,7 @@ const router = express.Router();
 
 
 // GET ALL OF THE CURRENT USERS BOOKING
-router.get('/me', requireAuth, async (req, res) => {
+router.get('/me', restoreUser, requireAuth, async (req, res) => {
     const Bookings = await Booking.findAll({
         where: {
             user_id: req.user.id
@@ -52,7 +52,7 @@ router.get('/:booking_id', async (req, res) => {
 })
 
 // EDIT A BOOKING
-router.put('/:booking_id', requireAuth, async (req, res, next) => {
+router.put('/:booking_id', restoreUser, requireAuth, async (req, res, next) => {
     const { booking_id } = req.params;
     const booking = await Booking.findByPk(booking_id);
 
@@ -140,7 +140,7 @@ router.put('/:booking_id', requireAuth, async (req, res, next) => {
 });
 
 // DELETE A BOOKING
-router.delete('/:booking_id', requireAuth, async (req, res, next) => {
+router.delete('/:booking_id', restoreUser, requireAuth, async (req, res, next) => {
     const { booking_id } = req.params;
     const booking = await Booking.findOne({
         where: {
